@@ -1,0 +1,38 @@
+.red-hat-text{
+  font-family: "Red Hat Text", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+/* Стили для кнопки */
+.btn-custom {
+  background-color: #a358e8; /* Фиолетовый фон */
+  color: white; /* Белый текст */
+  padding: 10px 20px; /* Отступы вокруг текста */
+  border-radius: 30px; /* Округлые углы */
+  text-decoration: none; /* Убираем подчеркивание у ссылки */
+  font-size: 20px; /* Размер шрифта */
+  display: flex; /* Чтобы кнопка была блоком и занимала свою ширину */
+  justify-content: center;
+}
+
+.btn-custom:hover {
+  background-color: #8c47d6; /* Более темный оттенок при наведении */
+  text-decoration: none; /* Убираем подчеркивание при наведении */
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #a358e8;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень */
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+  background-color: #8050c3; /* Цвет темнее при наведении */
+}
+.carousel-item a {
+  text-decoration: none; /* Убирает подчеркивание */
+}
