@@ -387,18 +387,23 @@
     </div>
   </section>
 
-  <!-- 6 блок: Форма заявки -->
   <section class="request-form py-5" id="request-form"> 
   <div class="container d-flex justify-content-center align-items-center"> 
     <div class="text-center"> 
       <h2 class="fw-bold mb-4">Оставить заявку</h2> 
-      <form class="w-100" style="max-width: 500px;" action="https://formspree.io/f/mwpkgaez" method="post"> 
+      <!-- Форма отправки на Formspree -->
+      <form action="https://formspree.io/f/mwpkgaez" method="POST" style="max-width: 500px;" class="w-100">
+        <!-- Поле для имени -->
         <div class="mb-3"> 
+          <label for="name">Ваше имя:</label>
           <input type="text" class="form-control" id="name" name="name" placeholder="Ваше имя" required> 
         </div> 
+        <!-- Поле для телеграм-ника -->
         <div class="mb-3"> 
+          <label for="telegram">Ник в Telegram:</label>
           <input type="text" class="form-control" id="telegram" name="telegram" placeholder="Ник в Telegram" required> 
         </div> 
+        <!-- Кнопка отправки -->
         <button type="submit" class="btn" style="background-color: #a358e8; color: white;">Отправить</button> 
       </form> 
     </div> 
