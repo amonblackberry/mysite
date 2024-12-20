@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
       background-color: #fff;
@@ -46,7 +46,15 @@
       color: #5a2fb1;
     }
 
-    /* Округлые блоки */
+    /* Мобильная адаптация */
+    @media (max-width: 991px) {
+      .navbar-nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* Стиль для округленных блоков */
     .rounded-box {
       border-radius: 30px;
       background-color: #f3f1f8;
@@ -55,6 +63,23 @@
       margin: 15px;
       border-color: #a358e8;
       border: 3px solid;
+      flex: 1 1 calc(25% - 30px);
+      /* Это гарантирует 4 блока в ряд (25% минус отступы) */
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+      .advantages .d-flex {
+        flex-direction: column;
+        /* Располагаем блоки вертикально на мобильных устройствах */
+      }
+
+      .rounded-box {
+        max-width: 100%;
+        /* Каждый блок на мобильных будет занимать всю ширину */
+        margin-bottom: 15px;
+        /* Добавляем отступы между блоками */
+      }
     }
 
     /* Карусель */
@@ -68,6 +93,7 @@
     .services-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
+      /* 4 колонки на больших экранах */
       gap: 20px;
     }
 
@@ -82,6 +108,28 @@
 
     .service-cell:hover {
       background-color: #f3f1f8;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+        /* 3 колонки для экранов до 1024px */
+      }
+    }
+
+    @media (max-width: 768px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2 колонки для экранов до 768px */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+        /* 1 колонка для экранов до 480px */
+      }
     }
 
     .form-control {
@@ -154,6 +202,11 @@
       .text-image-section img {
         max-width: 100%;
       }
+
+      .fixed-size {
+        width: 100%;
+        /* Изображение будет занимать всю ширину на мобильных устройствах */
+      }
     }
   </style>
 </head>
@@ -162,9 +215,17 @@
   <!-- Шапка -->
   <header>
     <nav class="navbar navbar-expand-lg">
-      <div class="container">
-        <a href="#" class="navbar-brand fw-bold">AmonBlackberry</a>
-        <ul class="navbar-nav">
+      <a class="navbar-brand fw-bold" href="#">AmonBlackberry</a>
+
+      <!-- Кнопка гамбургера -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Навигационное меню -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
           <li><a href="#main" class="nav-link">Главная</a></li>
           <li><a href="#advantages" class="nav-link">Преимущества</a></li>
           <li><a href="#projects" class="nav-link">Проекты</a></li>
@@ -176,13 +237,15 @@
 
   <!-- 1 блок: текст и изображение (с фото справа) -->
   <section class="text-image-section py-5" id="main">
-    <div class="container d-flex align-items-center">
-      <div class="text-block">
+    <div class="container d-flex flex-column flex-lg-row align-items-center">
+      <!-- Текстовый блок -->
+      <div class="text-block mb-4 mb-lg-0">
         <h2 class="fs-1 fw-bold">ВАШ ИДЕАЛЬНЫЙ САЙТ - УНИКАЛЬНЫЙ, ТОЧНО В СРОК, С ВНИМАНИЕМ К ДЕТАЛЯМ</h2>
         <p class="fs-4">создам сайт с продающим дизайном, который будет привлекать клиентов каждый день </p>
-        <a href="#request-form" class="btn-custom  mt-4">Оставить заявку</a>
+        <a href="#request-form" class="btn-custom mt-4">Оставить заявку</a>
       </div>
-      <img src="img/main.png" alt="Image" class="fixed-size ms-5">
+      <!-- Изображение -->
+      <img src="img/main.png" alt="Image" class="fixed-size ms-lg-5 w-100 w-lg-auto">
     </div>
   </section>
 
@@ -190,7 +253,7 @@
   <section class="advantages py-5" id="advantages">
     <div class="container">
       <h2 class="text-center mb-5 fs-2 fw-bold">Преимущества</h2>
-      <div class="d-flex justify-content-between">
+      <div class="d-flex flex-wrap justify-content-between">
         <div class="rounded-box">
           <h4>Индивидуальный подход</h4>
           <p>Каждый проект – уникальное решение для вашего бизнеса</p>
@@ -305,29 +368,33 @@
     <div class="container">
       <h2 class="text-center fw-bold">Дополнительные Услуги</h2>
       <div class="services-grid">
-        <div class="service-cell" data-description="Исправление ошибок/багов и добавление или изменение разделов/блоков.">Доработка сайта</div>
+        <div class="service-cell"
+          data-description="Исправление ошибок/багов и добавление или изменение разделов/блоков.">Доработка сайта</div>
         <div class="service-cell" data-description="Обновление дизайна и контента">Редизайн сайта</div>
-        <div class="service-cell" data-description="Компьютеры, ноутбук, планшет и телефон">Адаптация под различные устройства</div>
-        <div class="service-cell" data-description="Правильное отображение сайта во всех браузерах">Кроссбраузерная адаптация</div>
-        <div class="service-cell" data-description="Баннеры/калькуляторы/квизы/формы записи/интерактивные элементы">Разработка отдельных элементов</div>
-        <div class="service-cell" data-description="Создание точной копии сайта или с дальнейшим изменением контента">Копирование сайта</div>
-        <div class="service-cell" data-description="Перевод сайта на английский или др. языки, настройка правильного отображения перевода сайта">Настройка мультиязычности</div>
+        <div class="service-cell" data-description="Компьютеры, ноутбук, планшет и телефон">Адаптация под различные
+          устройства</div>
+        <div class="service-cell" data-description="Правильное отображение сайта во всех браузерах">Кроссбраузерная
+          адаптация</div>
+        <div class="service-cell" data-description="Баннеры/калькуляторы/квизы/формы записи/интерактивные элементы">
+          Разработка отдельных элементов</div>
+        <div class="service-cell" data-description="Создание точной копии сайта или с дальнейшим изменением контента">
+          Копирование сайта</div>
+        <div class="service-cell"
+          data-description="Перевод сайта на английский или др. языки, настройка правильного отображения перевода сайта">
+          Настройка мультиязычности</div>
         <div class="service-cell" data-description="Верстка сайта с макета">Верстка сайта</div>
       </div>
     </div>
   </section>
 
-  <!-- 6 блок: Форма заявки --> 
+  <!-- 6 блок: Форма заявки -->
   <section class="request-form py-5" id="request-form">
-    <div class="container d-flex justify-content-center align-items-center" >
+    <div class="container d-flex justify-content-center align-items-center">
       <div class="text-center">
         <h2 class="fw-bold mb-4">Оставить заявку</h2>
-        <form class="w-100" style="max-width: 500px;">
+        <form class="w-100" style="max-width: 500px;" action="https://formspree.io/f/mwpkgaez" method="post">
           <div class="mb-3">
             <input type="text" class="form-control" id="name" placeholder="Ваше имя" required>
-          </div>
-          <div class="mb-3">
-            <input type="email" class="form-control" id="email" placeholder="Ваш email" required>
           </div>
           <div class="mb-3">
             <input type="text" class="form-control" id="telegram" placeholder="Ник в Telegram" required>
@@ -349,7 +416,7 @@
     <p id="popup-text"></p>
     <button onclick="closePopup()">Закрыть</button>
   </div>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     document.querySelectorAll('.service-cell').forEach(cell => {
       cell.addEventListener('click', () => {
@@ -365,7 +432,7 @@
     }
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
